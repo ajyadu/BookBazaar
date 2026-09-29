@@ -1,0 +1,13 @@
+body { background: #f8f9fa; }
+.hero { background: linear-gradient(135deg, #eaf2ff, #f8f9fa); }
+.hero-card { text-align:center; font-size:4rem; }
+.book-card { transition: .2s; }
+.book-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,.1); }
+.book-image { height: 260px; object-fit: cover; }
+.placeholder-book { height:260px; display:flex; align-items:center; justify-content:center; background:#e9ecef; font-size:5rem; }
+.placeholder-detail { height:450px; display:flex; align-items:center; justify-content:center; background:#e9ecef; border-radius:12px; font-size:8rem; }
+.book-detail-image { max-height:450px; width:100%; object-fit:cover; }
+.auth-card { max-width:520px; background:white; padding:30px; border-radius:15px; box-shadow:0 8px 25px rgba(0,0,0,.08); }
+.auth-card input, .auth-card select { width:100%; padding:10px; border:1px solid #ced4da; border-radius:6px; }
+.detail-container{height:auto;width:80%;margin-top: 2%;margin-bottom:auto;margin-left:25%;margin-right: 50px;}
+.detail-card {height:auto ;width:60%;padding-top: 50px;padding-left: 15px;padding-bottom: 50px;display:flex ; align-items: center; justify-content: center;}

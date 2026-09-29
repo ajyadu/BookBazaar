@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Your Cart{% endblock %}
+{% block content %}
+<div class="container py-5">
+<h1>Your Cart</h1>
+{% if cart.items.all %}
+<div class="table-responsive mt-4">
+<table class="table align-middle">
+<thead><tr><th>Book</th><th>Price</th><th>Quantity</th><th>Subtotal</th><th></th></tr></thead>
+<tbody>
+{% for item in cart.items.all %}
+<tr>
+<td>{{ item.book.title }}</td>
+<td>₹{{ item.book.price }}</td>
+<td><form method="post" action="{% url 'cart:update' item.pk %}" class="d-flex gap-2">{% csrf_token %}<input type="number" name="quantity" min="1" max="{{ item.book.stock }}" value="{{ item.quantity }}" class="form-control" style="width:90px"></form></td>
+<td>₹{{ item.subtotal }}</td>
+<td><a href="{% url 'cart:remove' item.pk %}" class="btn btn-sm btn-outline-danger">Remove</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+<div class="text-end"><h3>Total: ₹{{ cart.total }}</h3><a href="{% url 'order:checkout' %}" class="btn btn-success btn-lg">Checkout</a></div>
+{% else %}
+<div class="text-center py-5"><h3>Your cart is empty.</h3><a href="{% url 'book:book_list' %}" class="btn btn-primary">Browse Books</a></div>
+{% endif %}
+</div>
+{% endblock %}

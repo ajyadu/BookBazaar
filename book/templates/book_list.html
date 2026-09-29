@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Books{% endblock %}
+{% block content %}
+<div class="container py-5">
+<h1 class="mb-4">Books</h1>
+<form class="row g-2 mb-4">
+    <div class="col-md-4"><input name="q" value="{{ query }}" class="form-control" placeholder="Search title, author or ISBN"></div>
+    <div class="col-md-2"><select name="category" class="form-select">
+        <option value="">All categories</option>
+        <option value="fiction" {% if category == "fiction" %}selected{% endif %}>Fiction</option>
+        <option value="non-fiction" {% if category == "non-fiction" %}selected{% endif %}>Non-Fiction</option>
+        <option value="academic" {% if category == "academic" %}selected{% endif %}>Academic</option>
+    </select></div>
+    <div class="col-md-2"><input name="min_price" value="{{ min_price }}" type="number" min="0" class="form-control" placeholder="Min price"></div>
+    <div class="col-md-2"><input name="max_price" value="{{ max_price }}" type="number" min="0" class="form-control" placeholder="Max price"></div>
+    <div class="col-md-2"><button class="btn btn-primary w-100">Filter</button></div>
+</form>
+<div class="row">
+{% for book in books %}
+<div class="col-sm-6 col-lg-4 mb-4">
+<div class="card h-100 book-card">
+{% if book.image %}<img src="{{ book.image.url }}" class="card-img-top book-image">{% else %}<div class="placeholder-book">📖</div>{% endif %}
+<div class="card-body">
+<span class="badge bg-secondary">{{ book.get_category_display }}</span>
+<h5 class="mt-2">{{ book.title }}</h5>
+<p class="text-muted">{{ book.author }}</p>
+<p>{{ book.description|truncatewords:18 }}</p>
+<h5>₹{{ book.price }}</h5>
+<a href="{% url 'book:book_detail' book.pk %}" class="btn btn-primary">View Details</a>
+</div></div></div>
+{% empty %}<p>No matching books found.</p>{% endfor %}
+</div>
+</div>
+{% endblock %}
